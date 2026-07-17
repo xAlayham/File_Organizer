@@ -1,14 +1,29 @@
-import scanner, categoriser
+import scanner, categoriser, planner, executor, report
 
 folder = input("Enter a folder: ")
 files = scanner.scan_folder(folder)
-
+prefix = "backup"
 
 if files is None:
     print("Folder not found.")
 else:
-    files = categoriser.categorise_files(files)
-    category_count = categoriser.count_categories(files)
+    categories = categoriser.categorise_files(files)
     print(f"Found: {len(files)} files")
-    for category, filenames in files.items():
+    for category, filenames in categories.items():
         print(f"{category} ({len(filenames)}) {' '.join(filenames)}")
+    operations = planner.build_operations(files, prefix)
+    print("=== OPERATION REVIEW ===\n")
+    for operation in operations:
+        print(f"Old: {operation['old']}")
+        print(f"New: {operation['new']}")
+        print(f"Destination: {operation['destination']}")
+        print()
+    
+    choice = input("Proceed with rename? (y/n)").lower()
+    if choice == "y":
+        rename_result = executor.execute_plan(folder, operations)
+        report.print_execution_report(rename_result)
+    
+    files = scanner.scan_folder(folder)
+    print(files)
+
