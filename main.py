@@ -19,11 +19,14 @@ else:
         print(f"Destination: {operation['destination']}")
         print()
     
-    choice = input("Proceed with rename? (y/n)").lower()
-    if choice == "y":
+    choice_rename = input("Proceed with rename? (y/n)").lower()
+    if choice_rename == "y":
         rename_result = executor.execute_plan(folder, operations)
         report.print_execution_report(rename_result)
-    
+
+
     files = scanner.scan_folder(folder)
-    print(files)
+    print("\n=== NEW FOLDER CONTENTS ===")
+    for file in files:
+        print(file)
 
