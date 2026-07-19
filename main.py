@@ -1,4 +1,4 @@
-import scanner, categoriser, planner, executor, report
+import scanner, categoriser, planner, executor, report, logger
 
 folder = input("Enter a folder: ")
 files = scanner.scan_folder(folder)
@@ -23,6 +23,12 @@ else:
     if choice_rename == "y":
         rename_result = executor.execute_plan(folder, operations)
         report.print_execution_report(rename_result)
+        
+        log_path = logger.create_log_file()
+    
+        logger.write_execution_log(log_path, folder, operations, rename_result)
+
+        print(f"Log saved to: {log_path}")
 
 
     files = scanner.scan_folder(folder)
