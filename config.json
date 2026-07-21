@@ -1,0 +1,5 @@
+{
+    "default_prefix": "backup",
+    "show_summary": true,
+    "run_tests": true
+}

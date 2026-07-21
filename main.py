@@ -1,9 +1,13 @@
-import scanner, categoriser, planner, executor, report, logger
+import scanner, categoriser, planner, executor, report, logger, config, test_args
 
-folder = input("Enter a folder: ")
+folder = test_args.args.folder
 files = scanner.scan_folder(folder)
-prefix = "backup"
+settings = config.load_config()
 
+prefix = test_args.args.prefix
+show_summary = settings["show_summary"]
+run_tests = settings["run_tests"]
+    
 if files is None:
     print("Folder not found.")
 else:
@@ -19,7 +23,10 @@ else:
         print(f"Destination: {operation['destination']}")
         print()
     
-    choice_rename = input("Proceed with rename? (y/n)").lower()
+    if test_args.args.no_confirm is True:
+        choice_rename = "y"
+    else:
+        choice_rename = input("Proceed with rename? (y/n)").lower()
     if choice_rename == "y":
         rename_result = executor.execute_plan(folder, operations)
         report.print_execution_report(rename_result)
