@@ -26,3 +26,22 @@ def print_files(files):
 
 def print_progress(current, total, filename):
     print(f"[{current}/{total}] {filename}")
+
+def print_summary(summary):
+    print_heading("SUMMARY")
+    for key, value in summary.items():
+        print(f"{key.capitalize()}: {value}")
+
+def print_error(message):
+    print(f"ERROR:{message}")
+
+def print_welcome():
+    print("=============\n")
+    print("Batch File Organizer v1.0\n")
+    print("=============\n")
+
+def print_log_saved(log_path):
+    print(f"Log saved to: {log_path}")
+
+def print_file_count(count):
+    print(f"Found: {count} files")

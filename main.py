@@ -11,6 +11,7 @@ import display
 
 system_logger.setup_logger()
 system_logger.info("Application Started")
+display.print_welcome()
 
 folder = test_args.args.folder
 config_data = config.load_config()
@@ -23,14 +24,14 @@ system_logger.info("Scanning folder...")
 files = scanner.scan_folder(folder)
 
 if files is None:
-    print("Folder not found.")
+    display.print_error("Folder not found")
     system_logger.error("Folder not found")
 else:
     system_logger.info(f"Found {len(files)} files")
 
     categories = categoriser.categorise_files(files)
-    print(f"Found: {len(files)} files")
-    display.print_categories(categories)        
+    display.print_file_count(len(files))
+    display.print_categories(categories)
 
     operations = planner.build_operations(files, prefix)
     display.print_heading("OPERATION REVIEW")
@@ -44,7 +45,7 @@ else:
         
         log_path = logger.create_log_file()
         logger.write_execution_log(log_path, folder, operations, rename_result)
-        print(f"Log saved to: {log_path}")
+        display.print_log_saved(log_path)
 
         system_logger.info("Execution complete")
 
