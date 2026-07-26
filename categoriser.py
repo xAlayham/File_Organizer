@@ -34,4 +34,3 @@ def count_categories(categories):
     for category in categories:
         counts[category] = len(categories[category])
     return counts
-

@@ -1,5 +1,8 @@
 def print_operations(operations):
-    for operation in operations:
+    total = len(operations)
+    print_heading("OPERATION REVIEW")
+    for i, operation in enumerate(operations, start=1):
+        print(f"[{i}/{total}]")
         print(f"Old: {operation['old']}")
         print(f"New: {operation['new']}")
         print(f"Destination: {operation['destination']}")
@@ -20,3 +23,6 @@ def print_categories(categories):
 def print_files(files):
     for file in files:
         print(file)
+
+def print_progress(current, total, filename):
+    print(f"[{current}/{total}] {filename}")

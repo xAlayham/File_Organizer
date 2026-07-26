@@ -1,4 +1,4 @@
-import os, shutil
+import os, shutil, display
 
 def execute_rename(folder, old_name, new_name):
     try:        
@@ -14,10 +14,14 @@ def execute_plan(folder, operations):
     failed = 0
     result = {}
 
-    for operation in operations:
+    total = len(operations)
+    print("Renaming...\n")
+    
+    for i, operation in enumerate(operations,start=1):
         old = operation["old"]
         new = operation["new"]
         destination = operation["destination"]
+        display.print_progress(i, total, old)
         rename_ok = execute_rename(folder, old, new)
         if rename_ok is True:
             renamed += 1
