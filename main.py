@@ -41,7 +41,7 @@ else:
         system_logger.info("Executing rename plan")
 
         rename_result = executor.execute_plan(folder, operations)
-        report.print_execution_report(rename_result)
+        display.print_execution_report(rename_result)
         
         log_path = logger.create_log_file()
         logger.write_execution_log(log_path, folder, operations, rename_result)

@@ -26,14 +26,14 @@ A professional Python application that automates common file management tasks.
 ## Roadmap
 
 - [x] Project structure
-- [ ] Folder scanner
-- [ ] File categorization
-- [ ] Duplicate detection
-- [ ] Rename planner
-- [ ] Move planner
+- [x] Folder scanner
+- [x] File categorization
+- [x] Duplicate detection
+- [x] Rename planner
+- [x] Move planner
 - [ ] Undo system
-- [ ] Logging
-- [ ] Report generation
-- [ ] Command-line interface
-- [ ] Configuration file
+- [x] Logging
+- [x] Report generation
+- [x] Command-line interface
+- [x] Configuration file
 - [ ] Unit tests

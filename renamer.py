@@ -1,4 +1,8 @@
 def rename_files(filename, number, prefix):
-    fname, ext = filename.rsplit(".", 1)
-    new_file = f"{prefix}_{number}.{ext}"
-    return new_file
+    if "." in filename:
+        fname, ext = filename.rsplit(".", 1)
+        new_file = f"{prefix}_{number}.{ext}"
+        return new_file
+    else:
+        new_file = f"{prefix}_{number}"
+        return new_file

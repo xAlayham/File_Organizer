@@ -17,5 +17,7 @@ def find_duplicates(folder):
         if len(filenames) > 1:
             original = filenames[0]
             for duplicate in filenames[1:]:
-                duplicates[original] = duplicate
+                if original not in duplicates:
+                    duplicates[original] = []
+                duplicates[original].append(duplicate)
     return duplicates

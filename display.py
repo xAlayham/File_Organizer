@@ -45,3 +45,8 @@ def print_log_saved(log_path):
 
 def print_file_count(count):
     print(f"Found: {count} files")
+
+def print_execution_report(result):
+    print("=== EXECUTION REPORT ===\n")
+    print(f"Files renamed: {result['renamed']}")
+    print(f"Failed: {result['failed']}")
