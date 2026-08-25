@@ -1,24 +1,7 @@
 import renamer, categoriser
 
-def build_plan(files, prefix):
-    plan = []
-    i = 1
-    for file in files:
-        new_file = renamer.rename_files(file, i, prefix)
-        tuple = (file, new_file)
-        plan.append(tuple)
-        i += 1
-    return plan
-
-def build_move_plan(files):
-    plan = []
-    for filename in files:
-        category = categoriser.file_category(filename)
-        tuple = (filename, category)
-        plan.append(tuple)
-    return plan
-
-def build_operations(files, prefix):
+def build_operations(files: list[str], prefix: str) -> list[dict]:
+    """Creates a plan showing the old file name, the new one and the destination"""
     operations = []
     i = 1
     for filename in files:

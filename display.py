@@ -50,3 +50,8 @@ def print_execution_report(result):
     print("=== EXECUTION REPORT ===\n")
     print(f"Files renamed: {result['renamed']}")
     print(f"Failed: {result['failed']}")
+
+def print_duplicates(duplicates):
+    for key, value in duplicates.items():
+        dupe_count = len(value)
+        print(f"Found {dupe_count} duplicate(s) of {duplicates[key]}: {', '.join(value)}")

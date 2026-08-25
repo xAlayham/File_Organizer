@@ -3,7 +3,8 @@ import shutil
 import display
 import system_logger
 
-def execute_rename(folder, old_name, new_name):
+def execute_rename(folder: str, old_name: str, new_name: str) -> bool:
+    """Rename a file from its old name to a new name within a folder"""
     try:        
         old_path = os.path.join(folder, old_name)
         new_path = os.path.join(folder, new_name)
@@ -13,7 +14,8 @@ def execute_rename(folder, old_name, new_name):
         system_logger.error(f"Failed to move {old_name}: {e}")
         return False
 
-def execute_plan(folder, operations):
+def execute_plan(folder: str, operations: list[dict]) -> dict:
+    """Execute a list of file renaming and moving operations"""
     renamed = 0
     failed = 0
     result = {}
@@ -38,11 +40,13 @@ def execute_plan(folder, operations):
     result["failed"] = failed
     return result
 
-def create_folder(folder, destination):
+def create_folder(folder: str, destination: str) -> None:
+    """Create the destination folder if it does not already exist"""
     destination_folder = os.path.join(folder, destination)
     os.makedirs(destination_folder, exist_ok=True)
 
-def move_file(folder, destination, filename):
+def move_file(folder: str, destination: str, filename: str) -> None:
+    """Moves file from main folder to the destination folder"""
     destination_folder = os.path.join(folder, destination)
     old_path = os.path.join(folder, filename)
     destination_path = os.path.join(destination_folder, filename)

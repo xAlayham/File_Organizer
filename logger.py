@@ -21,4 +21,3 @@ def write_execution_log(log_path, folder, operations, result):
         f.write(f"Renamed: {result['renamed']}\n")
         f.write(f"Failed: {result['failed']}\n\n")
         f.write("Application Finished\n")
-

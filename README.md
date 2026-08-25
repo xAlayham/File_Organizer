@@ -29,11 +29,14 @@ A professional Python application that automates common file management tasks.
 - [x] Folder scanner
 - [x] File categorization
 - [x] Duplicate detection
-- [x] Rename planner
-- [x] Move planner
+- [x] Operation planner (renamer + mover)
 - [ ] Undo system
 - [x] Logging
 - [x] Report generation
 - [x] Command-line interface
 - [x] Configuration file
 - [ ] Unit tests
+
+ ## Requirements
+
+No external dependencies, uses only the Python standard library.
