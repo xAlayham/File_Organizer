@@ -1,0 +1,14 @@
+Application started
+Folder: C:\Users\alayh\OneDrive\Desktop\File_Oganiser\FileOrganiser_E2E_Test
+
+Operations:
+notes.txt -> backup_1.txt (Document)
+photo.jpg -> backup_2.jpg (Image)
+report.pdf -> backup_3.pdf (Document)
+script.py -> backup_4.py (Code)
+
+Result:
+Renamed: 4
+Failed: 0
+
+Application Finished
