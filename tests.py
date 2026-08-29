@@ -133,6 +133,48 @@ class TestUndo(unittest.TestCase):
 
             self.assertFalse(result)
 
+    def test_undo_operations_removes_empty_destination_folders(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            image_folder = os.path.join(tmpdir, "Image")
+            document_folder = os.path.join(tmpdir, "Document")
+
+            os.makedirs(image_folder)
+            os.makedirs(document_folder)
+
+            with open(os.path.join(image_folder, "backup_1.jpg"), "w") as file:
+                file.write("image")
+
+            with open(os.path.join(document_folder, "backup_2.pdf"), "w") as file:
+                file.write("document")
+
+            operations = [
+                {
+                    "old": "photo.jpg",
+                    "new": "backup_1.jpg",
+                    "destination": "Image"
+                },
+                {
+                    "old": "report.pdf",
+                    "new": "backup_2.pdf",
+                    "destination": "Document"
+                }
+            ]
+
+            result = undo_operations(tmpdir, operations)
+
+            self.assertEqual(result, 2)
+
+            self.assertTrue(
+                os.path.exists(os.path.join(tmpdir, "photo.jpg"))
+            )
+
+            self.assertTrue(
+                os.path.exists(os.path.join(tmpdir, "report.pdf"))
+            )
+
+            self.assertFalse(os.path.exists(image_folder))
+            self.assertFalse(os.path.exists(document_folder))
+
 class TestHistory(unittest.TestCase):
 
     def test_save_and_load_history(self):
