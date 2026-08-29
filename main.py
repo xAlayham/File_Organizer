@@ -60,8 +60,10 @@ else:
     operations = planner.build_operations(files, prefix)
     display.print_heading("OPERATION REVIEW")
     display.print_operations(operations)
-    
-    if display.confirm_action("Proceed with rename?", auto_confirm=args.no_confirm):
+
+    if args.dry_run:
+        print("Dry run — no changes made.")
+    elif display.confirm_action("Proceed with rename?", auto_confirm=args.no_confirm):
         system_logger.info("Executing rename plan")
 
         rename_result = executor.execute_plan(folder, operations)
@@ -70,6 +72,8 @@ else:
         log_path = logger.create_log_file()
         logger.write_execution_log(log_path, folder, operations, rename_result)
         display.print_log_saved(log_path)
+
+        history.save_history(folder, operations)
 
         system_logger.info("Execution complete")
 
