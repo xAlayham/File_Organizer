@@ -3,3 +3,5 @@ __pycache__/
 .venv/
 venv/
 .env
+logs/
+FileOrganiser_E2E_Test/

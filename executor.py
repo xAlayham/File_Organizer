@@ -38,10 +38,11 @@ def execute_plan(folder: str, operations: list[dict]) -> dict:
         else:
             failed += 1
 
-    result["renamed"] = renamed
-    result["failed"] = failed
-    result["successful_operations"] = successful_operations
-    return result
+    return {
+        "renamed": renamed,
+        "failed": failed,
+        "successful_operations": successful_operations
+    }
 
 def create_folder(folder: str, destination: str) -> None:
     """Create the destination folder if it does not already exist"""

@@ -1,4 +1,6 @@
-import hash, os, scanner
+import hash
+import os
+import scanner
 
 def find_duplicates(folder: str) -> dict:
     """Matches files with identical content by hash and groups them"""

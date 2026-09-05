@@ -1,10 +1,10 @@
 import json
-import os 
+import os
 
 HISTORY_FILE = ".file_organiser_history.json"
 
 def save_history(folder: str, operations: list[dict]) -> None:
-    """Save the latest organisation operation to a JSON file"""
+    """Save the latest organisation operation to a JSON file."""
 
     history_path = os.path.join(folder, HISTORY_FILE)
 
@@ -12,7 +12,7 @@ def save_history(folder: str, operations: list[dict]) -> None:
         json.dump(operations, file, indent=4)
 
 def load_history(folder: str) -> list[dict] | None:
-    """Load the latest organisation operations from history file"""
+    """Load the latest organisation operations from history file."""
 
     history_path = os.path.join(folder, HISTORY_FILE)
 

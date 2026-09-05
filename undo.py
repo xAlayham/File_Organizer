@@ -26,7 +26,7 @@ def undo_operations(folder: str, operations: list[dict]) -> int:
         if undo_operation(folder, operation):
             undone += 1
 
-    destinations = set(operation["destination"] for operation in operations)
+    destinations = {operation["destination"] for operation in operations}
 
     for destination in destinations:
         destination_folder = os.path.join(folder, destination)

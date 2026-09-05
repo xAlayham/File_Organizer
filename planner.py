@@ -1,4 +1,5 @@
-import renamer, categoriser
+import renamer
+import categoriser
 
 def build_operations(files: list[str], prefix: str) -> list[dict]:
     """Creates a plan showing the old file name, the new one and the destination"""

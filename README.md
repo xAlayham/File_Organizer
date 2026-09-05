@@ -161,6 +161,9 @@ Example:
 If `config.json` is missing or contains malformed JSON, the application falls back to its default settings.
 
 Settings provided in the configuration file are merged with the default settings.
+* `default_prefix` — the prefix used when renaming files if `--prefix` isn't given.
+* `show_summary` — when `true`, prints the file-count/category breakdown before renaming and the folder contents afterward.
+* `run_tests` — when `true`, runs the automated test suite as a self-check before doing anything else, and aborts if any test fails.
 
 ## Logging
 

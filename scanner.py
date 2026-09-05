@@ -1,8 +1,8 @@
 import os
+from history import HISTORY_FILE
 
-HISTORY_FILE = ".file_organiser_history.json"
-
-def scan_folder(path):
+def scan_folder(path: str) -> list[str] | None:
+    """Return files in a folder, excluding the history file."""
     if not os.path.exists(path):
         return None
 
@@ -13,11 +13,3 @@ def scan_folder(path):
         if os.path.isfile(full_path) and item != HISTORY_FILE:
             files.append(item)
     return files
-
-def scan_folder_recursive(path):
-    all_files = []
-    for root, dirs, files in os.walk(path):
-        for filename in  files:
-            full_path = os.path.join(root, filename)
-            all_files.append(full_path)
-    return all_files

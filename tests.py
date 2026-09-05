@@ -4,7 +4,7 @@ import os
 from duplicates import find_duplicates
 from undo import undo_operation, undo_operations
 import history
-from scanner import scan_folder, scan_folder_recursive
+from scanner import scan_folder
 from categoriser import file_category, categorise_files, count_categories
 from renamer import rename_files
 from planner import build_operations
@@ -272,30 +272,6 @@ class TestScanner(unittest.TestCase):
             result = scan_folder(tmpdir)
 
             self.assertEqual(result, ["photo.jpg"])
-
-    def test_scan_folder_recursive(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            images = os.path.join(tmpdir, "Images")
-            documents = os.path.join(tmpdir, "Documents")
-
-            os.mkdir(images)
-            os.mkdir(documents)
-
-            image_file = os.path.join(images, "photo.jpg")
-            document_file = os.path.join(documents, "notes.txt")
-
-            with open(image_file, "w") as file:
-                file.write("image")
-
-            with open(document_file, "w") as file:
-                file.write("notes")
-
-            result = scan_folder_recursive(tmpdir)
-
-            self.assertEqual(
-                set(result),
-                {image_file, document_file}
-            )
 
 class TestCategoriser(unittest.TestCase):
 
@@ -728,6 +704,8 @@ class TestConfig(unittest.TestCase):
                 result,
                 {
                     "default_prefix": "backup",
+                    "show_summary": True,
+                    "run_tests": True,
                 }
             )
 
@@ -744,6 +722,8 @@ class TestConfig(unittest.TestCase):
                 result,
                 {
                     "default_prefix": "backup",
+                    "show_summary": True,
+                    "run_tests": True,
                 }
             )
 

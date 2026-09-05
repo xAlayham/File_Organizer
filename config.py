@@ -2,10 +2,12 @@ import json
 
 DEFAULTS = {
     "default_prefix": "backup",
+    "show_summary": True,
+    "run_tests": True,
 }
 
-def load_config(filepath: str ="config.json") -> dict:
-    """Load configuration from a JSON file and return the settings, uses defaults if loading fails"""
+def load_config(filepath: str = "config.json") -> dict:
+    """Load configuration from a JSON file, falling back to defaults if loading fails."""
     try:
         with open(filepath) as f:
             data = json.load(f)
