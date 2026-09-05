@@ -18,6 +18,7 @@ def execute_plan(folder: str, operations: list[dict]) -> dict:
     """Execute a list of file renaming and moving operations"""
     renamed = 0
     failed = 0
+    successful_operations = []
     result = {}
 
     total = len(operations)
@@ -33,11 +34,13 @@ def execute_plan(folder: str, operations: list[dict]) -> dict:
             renamed += 1
             create_folder(folder, destination)
             move_file(folder, destination, new)
+            successful_operations.append(operation)
         else:
             failed += 1
 
     result["renamed"] = renamed
     result["failed"] = failed
+    result["successful_operations"] = successful_operations
     return result
 
 def create_folder(folder: str, destination: str) -> None:

@@ -580,6 +580,36 @@ class TestExecutor(unittest.TestCase):
 
             self.assertEqual(result["renamed"], 0)
             self.assertEqual(result["failed"], 1)
+            self.assertEqual(result["successful_operations"], [])
+
+    def test_execute_plan_partial_failure(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+
+            with open(os.path.join(tmpdir, "photo.jpg"), "w") as file:
+                file.write("image")
+
+            operations = [
+                {
+                    "old": "photo.jpg",
+                    "new": "backup_1.jpg",
+                    "destination": "Image"
+                },
+                {
+                    "old": "missing.jpg",
+                    "new": "backup_2.jpg",
+                    "destination": "Image"
+                }
+            ]
+
+            result = execute_plan(tmpdir, operations)
+
+            self.assertEqual(result["renamed"], 1)
+            self.assertEqual(result["failed"], 1)
+
+            self.assertEqual(
+                result["successful_operations"],
+                [operations[0]]
+            )
 
 class TestCLI(unittest.TestCase):
 
@@ -608,7 +638,7 @@ class TestCLI(unittest.TestCase):
 
             args = parse_args()
 
-            self.assertEqual(args.prefix, "backup")
+            self.assertIsNone(args.prefix)
 
         finally:
             sys.argv = old_argv
@@ -688,8 +718,6 @@ class TestConfig(unittest.TestCase):
             result = load_config(config_path)
 
             self.assertEqual(result["default_prefix"], "project")
-            self.assertFalse(result["show_summary"])
-            self.assertTrue(result["run_tests"])
 
     def test_missing_config_uses_defaults(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -700,8 +728,6 @@ class TestConfig(unittest.TestCase):
                 result,
                 {
                     "default_prefix": "backup",
-                    "show_summary": True,
-                    "run_tests": True
                 }
             )
 
@@ -718,8 +744,6 @@ class TestConfig(unittest.TestCase):
                 result,
                 {
                     "default_prefix": "backup",
-                    "show_summary": True,
-                    "run_tests": True
                 }
             )
 
@@ -733,8 +757,6 @@ class TestConfig(unittest.TestCase):
             result = load_config(config_path)
 
             self.assertEqual(result["default_prefix"], "test")
-            self.assertTrue(result["show_summary"])
-            self.assertTrue(result["run_tests"])
 
 class TestLogger(unittest.TestCase):
 

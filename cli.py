@@ -8,7 +8,7 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         "--prefix",
-        default="backup",
+        default=None,
     )
 
     parser.add_argument(

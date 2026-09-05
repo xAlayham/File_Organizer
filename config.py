@@ -2,8 +2,6 @@ import json
 
 DEFAULTS = {
     "default_prefix": "backup",
-    "show_summary": True,
-    "run_tests": True
 }
 
 def load_config(filepath: str ="config.json") -> dict:

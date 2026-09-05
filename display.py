@@ -55,3 +55,6 @@ def print_duplicates(duplicates):
     for key, value in duplicates.items():
         dupe_count = len(value)
         print(f"Found {dupe_count} duplicate(s) of {duplicates[key]}: {', '.join(value)}")
+
+def print_undo_result(undone):
+    print(f"Undone {undone} operations")
